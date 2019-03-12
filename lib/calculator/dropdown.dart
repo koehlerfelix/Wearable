@@ -11,7 +11,7 @@ class _HauttypState extends State<HauttypButton>  {
 
   @override
   void initState() {
-    _values.addAll(["1", "2", "3"]);
+    _values.addAll(["sehr hell", "hell", "normal", "bräunlich", "braun", "sehr braun"]);
     _value = _values.elementAt(0);
   }
 
@@ -29,7 +29,7 @@ class _HauttypState extends State<HauttypButton>  {
           value: value,
           child: new Row(
               children: <Widget>[
-                new Text("Hauttyp: ${value}")
+                new Text("${value}")
               ]
           ),
         );

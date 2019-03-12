@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.green,
           bottom: new TabBar(
             tabs: <Widget>[
-              new Tab(icon: Icon(Icons.brightness_2)),
+              new Tab(icon: Icon(Icons.laptop_mac)),
               new Tab(text: "Individueller Timer"),
             ],
           ),
