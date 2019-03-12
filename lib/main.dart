@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 void main() => runApp(MaterialApp(
-  title: 'Brightness-meassure',
+  title: 'UV-meassure',
   home: new Home(),
 ));
 
@@ -14,12 +14,12 @@ class Home extends StatelessWidget {
       length: 2,
       child: new Scaffold(
         appBar: new AppBar(
-          title: new Text("Helligkeitsmessung"),
+          title: new Text("UV-Timer"),
           backgroundColor: Colors.green,
           bottom: new TabBar(
             tabs: <Widget>[
               new Tab(icon: Icon(Icons.brightness_2)),
-              new Tab(text: "Tabelle"),
+              new Tab(text: "Individueller Timer"),
             ],
           ),
         ),
