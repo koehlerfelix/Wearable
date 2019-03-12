@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 
+
 class HauttypButton extends StatefulWidget {
+  _HauttypState state;
+
   @override
-  _HauttypState createState() => new _HauttypState();
+  _HauttypState createState() => state = new _HauttypState();
+
+  String getState() {
+    return state.getState();
+  }
+
 }
 class _HauttypState extends State<HauttypButton>  {
 
   String _value = "";
   List<String> _values = new List<String>();
+
+  String getState() {
+    return _value;
+  }
 
   @override
   void initState() {
@@ -43,13 +55,23 @@ class _HauttypState extends State<HauttypButton>  {
 
 
 class WeatherButton extends StatefulWidget {
+  _WeatherState state;
+
   @override
-  _WeatherState createState() => new _WeatherState();
+  _WeatherState createState() => state = new _WeatherState();
+
+  String getState() {
+    return state.getState();
+  }
 }
 class _WeatherState extends State<WeatherButton> {
 
   String _value = "";
   List<String> _values = new List<String>();
+
+  String getState() {
+    return _value;
+  }
 
   @override
   void initState() {
@@ -84,14 +106,24 @@ class _WeatherState extends State<WeatherButton> {
 }
 
 class TimeButton extends StatefulWidget {
+  _TimeState state;
+
   @override
-  _TimeState createState() => new _TimeState();
+  _TimeState createState() => state = new _TimeState();
+
+  String getState() {
+    return state.getState();
+  }
 }
 class _TimeState extends State<TimeButton>
     with AutomaticKeepAliveClientMixin<TimeButton>{
 
   String _value = "";
   List<String> _values = new List<String>();
+
+  String getState() {
+    return _value;
+  }
 
   @override
   void initState() {

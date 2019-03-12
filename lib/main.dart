@@ -32,10 +32,11 @@ class Home extends StatelessWidget {
 }
 
 class MyTabBarView extends StatelessWidget {
+  static CalculationWindow calculationWindow;
   Widget build(BuildContext context) {
     return new TabBarView(
       children: <Widget>[
-        new CalculationWindow(),
+        calculationWindow = new CalculationWindow(),
         new Counter(),
       ],
     );
