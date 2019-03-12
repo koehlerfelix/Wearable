@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:day_time_app/individual/counter.dart';
-import 'package:day_time_app/calculator/dropdown.dart';
+import 'package:day_time_app/calculator/calculationWindow.dart';
 //import 'package:flutter_blue/flutter_blue.dart';
 
 void main() => runApp(MaterialApp(
@@ -35,7 +35,7 @@ class MyTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return new TabBarView(
       children: <Widget>[
-        new HauttypButton(),
+        new CalculationWindow(),
         new Counter(),
       ],
     );
