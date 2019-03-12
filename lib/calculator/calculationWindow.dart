@@ -30,8 +30,8 @@ class CalculationWindow extends StatelessWidget {
               new Column(
                   children: <Widget>[
                     new Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 50.0, 0.0),
-                      child: new Text("In der Sonne ab: "),
+                      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 50.0, 0.0),
+                      child: new Text("In der Sonne ab: ", style: TextStyle(fontSize: 20.0))
                     ),
                     new Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 50.0, 0.0),
@@ -42,8 +42,8 @@ class CalculationWindow extends StatelessWidget {
               new Column(
                   children: <Widget>[
                     new Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
-                      child:  new Text("Hauttyp: "),
+                      padding: const EdgeInsets.fromLTRB(0.0, 20.0, 110.0, 0.0),
+                        child: new Text("Hauttyp: ", style: TextStyle(fontSize: 20.0))
                     ),
                     new Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 21.0, 0.0),
@@ -54,8 +54,8 @@ class CalculationWindow extends StatelessWidget {
               new Column(
                   children: <Widget>[
                     new Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
-                      child:  new Text("Wetter: "),
+                      padding: const EdgeInsets.fromLTRB(0.0, 20.0, 110.0, 0.0),
+                        child: new Text("Wetter: ", style: TextStyle(fontSize: 20.0))
                     ),
                     new Padding(
                       padding: const EdgeInsets.fromLTRB(30.0, 0.0, 21.0, 0.0),
@@ -68,7 +68,7 @@ class CalculationWindow extends StatelessWidget {
         )
     ),
         new Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 200.0, 21.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 110.0, 21.0, 0.0),
           child: new Result(
             calculationWindow: this,
           ),
@@ -97,19 +97,42 @@ class _ResultState extends State<Result>
   _ResultState({this.calcW});
 
   int _minutes = 0;
-  String state1 = "";
-  String state2 = "";
-  String state3 = "";
 
   void _calculate() {
     setState(() {
-      ++_minutes;
-      state1 = calcW.getTime();
-      state2 = calcW.getHauttyp();
-      state3 = calcW.getWeather();
+      _minutes = calculateResult(calcW);
     });
   }
 
+  int calculateResult(CalculationWindow calcW) {
+    int totalMin = 0;
+    double mult = 0;
+    double hautTypMin = 0;
+    switch(calcW.getWeather()) {
+      case "sonnig": {mult = 1;}break;
+      case "leicht bewölkt": {mult = 1.3;}break;
+      default: {mult = 1.8;}break;
+    }
+    switch(calcW.getTime()) {
+      case "10min": {totalMin += 10;}break;
+      case "30min": {totalMin += 30;}break;
+      case "1h": {totalMin += 60;}break;
+      case "2h": {totalMin += 120;}break;
+      default: {}break;
+    }
+    switch(calcW.getHauttyp()) {
+      case "sehr hell": {hautTypMin = 10;}break;
+      case "hell": {hautTypMin = 20;}break;
+      case "normal": {hautTypMin = 30;}break;
+      case "bräunlich": {hautTypMin = 90;;}break;
+      case "braun": {totalMin += 200;}break;
+      case "sehr braun": {hautTypMin = 400;}break;
+      default: {}break;
+    }
+    totalMin += (mult * hautTypMin).round();
+    
+    return totalMin;
+  }
   @override
   Widget build(BuildContext context) {
     return new Align(
@@ -117,17 +140,9 @@ class _ResultState extends State<Result>
         child: new Column(
           children: <Widget>[
             new Text(
-                'Minuten: $_minutes'
+                'Minuten: $_minutes', style: TextStyle(fontSize: 40.0),
             ),
-            new Text (
-                'Ab: $state1'
-            ),
-            new Text (
-                'Typ: $state2'
-            ),
-            new Text (
-                'Wetter: $state3'
-            ),
+            new Text(""),
             new RaisedButton(
               color: Theme.of(context).accentColor,
               onPressed: _calculate,
