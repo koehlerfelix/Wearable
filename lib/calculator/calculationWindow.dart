@@ -32,10 +32,10 @@ class CalculationWindow extends StatelessWidget {
                   children: <Widget>[
                     new Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 0.0, 50.0, 0.0),
-                      child: new Text("In der Sonne ab: ", style: TextStyle(fontSize: 20.0))
+                      child: new Text("In der Sonne ab: ", style: TextStyle(fontSize: 20.0, ))
                     ),
                     new Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 50.0, 0.0),
+                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 65.0, 0.0),
                       child: t = new TimeButton(),
                     ),
                   ]
@@ -59,7 +59,7 @@ class CalculationWindow extends StatelessWidget {
                         child: new Text("Wetter: ", style: TextStyle(fontSize: 20.0))
                     ),
                     new Padding(
-                      padding: const EdgeInsets.fromLTRB(30.0, 0.0, 21.0, 0.0),
+                      padding: const EdgeInsets.fromLTRB(30.0, 0.0, 35.0, 0.0),
                       child: w = new WeatherButton(),
                     ),
                   ]
@@ -97,7 +97,7 @@ class _ResultState extends State<Result>
   CalculationWindow calcW;
   _ResultState({this.calcW});
 
-  int _minutes = 0;
+  int _minutes = 1;
 
   void _calculate() {
     setState(() {
@@ -126,12 +126,14 @@ class _ResultState extends State<Result>
       case "hell": {hautTypMin = 20;}break;
       case "normal": {hautTypMin = 30;}break;
       case "bräunlich": {hautTypMin = 90;;}break;
-      case "braun": {totalMin += 200;}break;
+      case "braun": {hautTypMin = 320;}break;
       case "dunkelbraun": {hautTypMin = 1440;}break;
       default: {}break;
     }
     totalMin += (mult * hautTypMin).round();
-    
+    if (totalMin > 1440) {
+      totalMin = 1440;
+    }
     return totalMin;
   }
   @override
@@ -141,7 +143,10 @@ class _ResultState extends State<Result>
         child: new Column(
           children: <Widget>[
             new Text(
-                'Minuten: $_minutes', style: TextStyle(fontSize: 40.0),
+              'Stunden: ${((_minutes / 60) - 0.5).round()}', style: TextStyle(fontSize: 35.0),
+            ),
+            new Text(
+                'Minuten: ${_minutes % 60}', style: TextStyle(fontSize: 35.0),
             ),
             new Text(""),
             new Row(
@@ -149,13 +154,15 @@ class _ResultState extends State<Result>
               children: <Widget>[
                 new MaterialButton(
                   height: 70,
-                  color: Theme.of(context).accentColor,
+                  minWidth: 140,
+                  color: Colors.grey,
                   onPressed: _calculate,
                   child: new Text("Berechnen", style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
                 new MaterialButton(
                   height: 70,
-                  color: Theme.of(context).accentColor,
+                  minWidth: 140,
+                  color: Colors.grey,
                   onPressed: startTimer,
                   child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
