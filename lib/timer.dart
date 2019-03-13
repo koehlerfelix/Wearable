@@ -110,19 +110,11 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                     child: AnimatedBuilder(
                         animation: controller,
                         builder: (BuildContext context, Widget child) {
-                          return new Icon(controller.isAnimating
-                              ? Icons.pause
-                              : Icons.play_arrow);
+                          return new Icon(Icons.arrow_back);
                         }
                     ),
                     onPressed: () {
-                      if (controller.isAnimating)
-                        controller.stop();
-                      else {
-                        controller.reverse(from: controller.value == 0.0
-                        ? 1.0
-                        : controller.value);
-                      }
+                      Navigator.pop(context);
                     },
                   )
                 ],
