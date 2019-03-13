@@ -23,7 +23,7 @@ class _HauttypState extends State<HauttypButton>  {
 
   @override
   void initState() {
-    _values.addAll(["sehr hell", "hell", "normal", "bräunlich", "braun", "sehr braun"]);
+    _values.addAll(["sehr hell", "hell", "normal", "bräunlich", "braun", "dunkelbraun"]);
     _value = _values.elementAt(0);
   }
 

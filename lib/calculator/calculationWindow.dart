@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dropdown.dart';
+import 'package:day_time_app/timer.dart';
 
 class CalculationWindow extends StatelessWidget {
   HauttypButton h;
@@ -68,7 +69,7 @@ class CalculationWindow extends StatelessWidget {
         )
     ),
         new Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 110.0, 21.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 80.0, 21.0, 0.0),
           child: new Result(
             calculationWindow: this,
           ),
@@ -126,7 +127,7 @@ class _ResultState extends State<Result>
       case "normal": {hautTypMin = 30;}break;
       case "bräunlich": {hautTypMin = 90;;}break;
       case "braun": {totalMin += 200;}break;
-      case "sehr braun": {hautTypMin = 400;}break;
+      case "dunkelbraun": {hautTypMin = 1440;}break;
       default: {}break;
     }
     totalMin += (mult * hautTypMin).round();
@@ -143,12 +144,32 @@ class _ResultState extends State<Result>
                 'Minuten: $_minutes', style: TextStyle(fontSize: 40.0),
             ),
             new Text(""),
-            new RaisedButton(
-              color: Theme.of(context).accentColor,
-              onPressed: _calculate,
-              child: new Text("Berechnen", style: TextStyle(color: Colors.white)),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new MaterialButton(
+                  height: 70,
+                  color: Theme.of(context).accentColor,
+                  onPressed: _calculate,
+                  child: new Text("Berechnen", style: TextStyle(color: Colors.white, fontSize: 20)),
+                ),
+                new MaterialButton(
+                  height: 70,
+                  color: Theme.of(context).accentColor,
+                  onPressed: startTimer,
+                  child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
+                )
+              ],
             )
           ],));
+  }
+
+  void startTimer() {
+    _calculate();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Timer(Duration(minutes: _minutes))),
+    );
   }
 
   @override
