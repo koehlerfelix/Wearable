@@ -166,7 +166,10 @@ class _ResultState extends State<Result>
 
   void startTimer() {
     _calculate();
-
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Timer(Duration(minutes: _minutes))),
+    );
   }
 
   @override

@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class Timer extends StatefulWidget {
+  Duration duration;
+
+  Timer(Duration duration) {
+    this.duration = duration;
+  }
+
   @override
-  _timerState createState() => _timerState();
+  _timerState createState() => _timerState(duration);
 }
 
 class _timerState extends State<Timer> with TickerProviderStateMixin {
   AnimationController controller;
+  Duration duration;
+
+  _timerState(Duration duration) {
+    this.duration = duration;
+  }
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
@@ -19,8 +30,9 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 20),
+      duration: duration,
     );
+    controller.reverse(from: 1.0);
   }
 
   @override
@@ -45,7 +57,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                               return new CustomPaint(
                                 painter: TimerPainter(
                                   animation: controller,
-                                  backgroundColor: Colors.black,
+                                  backgroundColor: Colors.white,
                                   color: Colors.red,
                                 ),
                               );
@@ -67,6 +79,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                                         timerString,
                                         style: TextStyle(
                                           fontSize: 112,
+                                          color: Colors.white,
                                         )
                                     );
                                   }

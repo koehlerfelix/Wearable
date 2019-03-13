@@ -38,7 +38,7 @@ class MyTabBarView extends StatelessWidget {
       children: <Widget>[
         calculationWindow = new CalculationWindow(),
        // new Counter(),
-        new Timer(),
+        new Timer(Duration(seconds: 5)),
       ],
     );
   }
