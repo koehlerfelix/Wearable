@@ -154,13 +154,15 @@ class _ResultState extends State<Result>
               children: <Widget>[
                 new MaterialButton(
                   height: 70,
-                  color: Theme.of(context).accentColor,
+                  minWidth: 140,
+                  color: Colors.grey,
                   onPressed: _calculate,
                   child: new Text("Berechnen", style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
                 new MaterialButton(
                   height: 70,
-                  color: Theme.of(context).accentColor,
+                  minWidth: 140,
+                  color: Colors.grey,
                   onPressed: startTimer,
                   child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
