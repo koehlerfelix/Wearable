@@ -14,17 +14,40 @@ class Home extends StatelessWidget {
     return new DefaultTabController(
       length: 2,
       child: new Scaffold(
+        backgroundColor: Colors.amber,
+
         appBar: new AppBar(
-          title: new Text("UV-Timer"),
-          backgroundColor: Colors.green,
+          title: new Text(
+              "UV-Timer",style: TextStyle(color: Colors.black87),
+          ),
+          backgroundColor: Colors.white,
           bottom: new TabBar(
+            labelColor: Colors.amber,
+            unselectedLabelColor: Colors.black87,
+            indicatorColor: Colors.amber,
             tabs: <Widget>[
               new Tab(icon: Icon(Icons.laptop_mac)),
               new Tab(text: "Individueller Timer"),
             ],
           ),
         ),
-        body: new MyTabBarView(),
+        body:
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.01, 0.15, 0.5, 0.9],
+                colors: [
+                  Colors.white,
+                  Colors.limeAccent,
+                  Colors.amberAccent,
+                  Colors.amber,
+                ],
+              )
+            ),
+            child: new MyTabBarView() ,
+          )
       ),
     );
   }
