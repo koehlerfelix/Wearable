@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:day_time_app/individual/counter.dart';
 import 'package:day_time_app/calculator/calculationWindow.dart';
+import 'package:day_time_app/individual/individualWindow.dart';
 import 'timer.dart';
 
 void main() => runApp(MaterialApp(
@@ -32,13 +33,12 @@ class Home extends StatelessWidget {
 }
 
 class MyTabBarView extends StatelessWidget {
-  static CalculationWindow calculationWindow;
   Widget build(BuildContext context) {
     return new TabBarView(
       children: <Widget>[
-        calculationWindow = new CalculationWindow(),
+        new CalculationWindow(),
        // new Counter(),
-        new Timer(Duration(seconds: 5)),
+        new IndividualWindow(),
       ],
     );
   }

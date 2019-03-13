@@ -127,7 +127,7 @@ class _ResultState extends State<Result>
       case "normal": {hautTypMin = 30;}break;
       case "bräunlich": {hautTypMin = 90;;}break;
       case "braun": {totalMin += 200;}break;
-      case "sehr braun": {hautTypMin = 400;}break;
+      case "dunkelbraun": {hautTypMin = 1440;}break;
       default: {}break;
     }
     totalMin += (mult * hautTypMin).round();

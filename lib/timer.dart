@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:vibration/vibration.dart';
 
 class Timer extends StatefulWidget {
   Duration duration;
@@ -22,7 +23,15 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
-    return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    if (duration.inMilliseconds == 0) {
+      Vibration.vibrate(
+        pattern: [0, 500, 300, 200, 200, 200, 200, 200, 100, 500]
+      );
+      Navigator.pop(context);
+    }
+    return '${(duration.inHours).toString().padLeft(2, '0')}:'
+        '${(duration.inMinutes % 60).toString().padLeft(2, '0')}:'
+        '${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
@@ -70,7 +79,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                             children: <Widget>[
                               Text(
                                 "",
-                                style: TextStyle(fontSize: 60),
+                                style: TextStyle(fontSize: 100),
                               ),
                               AnimatedBuilder (
                                   animation: controller,
@@ -78,7 +87,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                                     return new Text(
                                         timerString,
                                         style: TextStyle(
-                                          fontSize: 112,
+                                          fontSize: 50,
                                           color: Colors.white,
                                         )
                                     );

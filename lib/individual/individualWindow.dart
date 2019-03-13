@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:day_time_app/timer.dart';
 
 class IndividualWindow extends StatelessWidget {
   Widget build(BuildContext context) {
-    Widget build(BuildContext context) {
-      return new Center (
-        child: new Column (
-            children: <Widget>[
-              new Align(
-                  alignment: Alignment.topLeft,
-                  child: new Column(
-                    children: <Widget>[
-                      new Text(""),
-                      new Text(""),
-                      new Column(
-                          children: <Widget>[
-                            new Padding(
-                                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 50.0, 0.0),
-                                child: new Text("In der Sonne ab: ", style: TextStyle(fontSize: 20.0))
-                            ),
-                          ]
-                      ),
-                      //new Result(),
-                    ],
-                  )
-              ),
-            ],
+    return new Center (
+      child: new Column (
+        children: <Widget>[
+          new MaterialButton(
+            height: 70,
+            color: Theme.of(context).accentColor,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Timer(Duration(seconds: 5))),
+              );
+            },
+            child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
           ),
-      );
-    }
+        ]
+      ),
+    );//new Result(),
   }
 }
