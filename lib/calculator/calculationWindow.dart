@@ -126,7 +126,7 @@ class _ResultState extends State<Result>
       case "hell": {hautTypMin = 20;}break;
       case "normal": {hautTypMin = 30;}break;
       case "bräunlich": {hautTypMin = 90;;}break;
-      case "braun": {totalMin += 200;}break;
+      case "braun": {hautTypMin = 200;}break;
       case "dunkelbraun": {hautTypMin = 1440;}break;
       default: {}break;
     }

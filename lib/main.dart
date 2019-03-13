@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:day_time_app/individual/counter.dart';
 import 'package:day_time_app/calculator/calculationWindow.dart';
 import 'package:day_time_app/individual/individualWindow.dart';
-import 'timer.dart';
 
 void main() => runApp(MaterialApp(
-  title: 'UV-meassure',
+  title: 'UV-Timer',
   home: new Home(),
 ));
 
