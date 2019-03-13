@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:day_time_app/individual/counter.dart';
 import 'package:day_time_app/calculator/calculationWindow.dart';
-//import 'package:flutter_blue/flutter_blue.dart';
+import 'timer.dart';
 
 void main() => runApp(MaterialApp(
   title: 'UV-meassure',
@@ -37,7 +37,8 @@ class MyTabBarView extends StatelessWidget {
     return new TabBarView(
       children: <Widget>[
         calculationWindow = new CalculationWindow(),
-        new Counter(),
+       // new Counter(),
+        new Timer(),
       ],
     );
   }
