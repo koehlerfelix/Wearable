@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:day_time_app/calculator/calculationWindow.dart';
 import 'package:day_time_app/individual/individualWindow.dart';
+import 'package:day_time_app/Setting/counter.dart';
+import 'package:day_time_app/Setting/connection.dart';
+
 
 void main() => runApp(MaterialApp(
   title: 'UV-Timer',
@@ -12,7 +15,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
-      length: 2,
+      length: 3,
       child: new Scaffold(
         backgroundColor: Colors.amber,
 
@@ -27,7 +30,8 @@ class Home extends StatelessWidget {
             indicatorColor: Colors.amber,
             tabs: <Widget>[
               new Tab(icon: Icon(Icons.laptop_mac)),
-              new Tab(text: "Individueller Timer"),
+              new Tab(icon: Icon(Icons.timer)),
+              new Tab(text: "Verbindung"),
             ],
           ),
         ),
@@ -58,8 +62,8 @@ class MyTabBarView extends StatelessWidget {
     return new TabBarView(
       children: <Widget>[
         new CalculationWindow(),
-       // new Counter(),
         new IndividualWindow(),
+        new FlutterBlueApp(),
       ],
     );
   }
