@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:day_time_app/Setting/widgets.dart';
+import 'package:day_time_app/individual/individualWindow.dart';
 
 void main() {
   runApp(new FlutterBlueApp());
@@ -152,8 +153,25 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
   }
 
   _writeCharacteristic(BluetoothCharacteristic c) async {
+    /*
     await device.writeCharacteristic(c, [0x12, 0x34],
         type: CharacteristicWriteType.withResponse);
+    setState(() {});
+    */
+    await device.writeCharacteristic(c, [0xFFFFFFFF],
+        type: CharacteristicWriteType.withoutResponse);
+    setState(() {});
+  }
+
+  _writeCharacteristicON(BluetoothCharacteristic c) async {
+    await device.writeCharacteristic(c, [0xFFFFFFFF],
+        type: CharacteristicWriteType.withoutResponse);
+    setState(() {});
+  }
+
+  _writeCharacteristicOFF(BluetoothCharacteristic c) async {
+    await device.writeCharacteristic(c, [0x000000],
+        type: CharacteristicWriteType.withoutResponse);
     setState(() {});
   }
 
@@ -319,10 +337,77 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
             (isScanning) ? _buildProgressBarTile() : new Container(),
             new ListView(
               children: tiles,
-            )
+            ),
+            new RaisedButton(
+              child: new Text("Vibrieren"),
+                onPressed: vibrate,
+            ),
           ],
         ),
       ),
     );
   }
+
+  int on = 0;
+  void vibrate() {
+
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+
+    if (on == 0) {
+      _writeCharacteristicON(vib);
+      on = 1;
+    } else {
+      _writeCharacteristicOFF(vib);
+      on = 0;
+    }
+  }
+
+  void stop() {
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+    _writeCharacteristicOFF(vib);
+  }
+  /*
+  return new DefaultTabController(
+      length: 3,
+      child: new Scaffold(
+        backgroundColor: Colors.amber,
+
+        appBar: new AppBar(
+          title: new Text(
+              "UV-Timer",style: TextStyle(color: Colors.black87),
+          ),
+          backgroundColor: Colors.white,
+          bottom: new TabBar(
+            labelColor: Colors.amber,
+            unselectedLabelColor: Colors.black87,
+            indicatorColor: Colors.amber,
+            tabs: <Widget>[
+              new Tab(icon: Icon(Icons.laptop_mac)),
+              new Tab(icon: Icon(Icons.timer)),
+              new Tab(text: "Verbindung"),
+            ],
+          ),
+        ),
+        body:
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.01, 0.15, 0.5, 0.9],
+                colors: [
+                  Colors.white,
+                  Colors.limeAccent,
+                  Colors.amberAccent,
+                  Colors.amber,
+                ],
+              )
+            ),
+            child: new MyTabBarView() ,
+          )
+      ),
+    );
+   */
 }
