@@ -27,6 +27,10 @@ class _CounterState extends State<Counter>
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            new RaisedButton(
+              onPressed: connect,
+              child: new Text("Verbinden"),
+            ),
             new Row(),
             new CounterDisplay(count: _counter),
             new Padding(
@@ -44,6 +48,9 @@ class _CounterState extends State<Counter>
 
   @override
   bool get wantKeepAlive => true;
+
+  void connect() {
+  }
 }
 
 class CounterDisplay extends StatelessWidget {

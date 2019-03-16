@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dropdown.dart';
 import 'package:day_time_app/timer.dart';
+import 'package:day_time_app/Setting/connection.dart';
 
 class CalculationWindow extends StatelessWidget {
   HauttypButton h;
   WeatherButton w;
   TimeButton t;
+  FlutterBlueApp blue;
+
+  CalculationWindow({this.blue});
+
+  FlutterBlueApp getBlue() {
+    return blue;
+  }
 
   String getHauttyp() {
     return h.getState();
@@ -163,7 +171,7 @@ class _ResultState extends State<Result>
                   height: 70,
                   minWidth: 140,
                   color: Colors.grey,
-                  onPressed: startTimer,
+                  onPressed: (){startTimer();},
                   child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
               ],
@@ -173,10 +181,13 @@ class _ResultState extends State<Result>
 
   void startTimer() {
     _calculate();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Timer(Duration(minutes: _minutes))),
+    AlertDialog alert = new AlertDialog(
+      content: new Timer(Duration(minutes: _minutes), calcW.getBlue()),
+      actions: <Widget>[
+        ],
     );
+    
+    showDialog(context: context, child: alert);
   }
 
   @override

@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:vibration/vibration.dart';
+import 'package:day_time_app/Setting/connection.dart';
 
 class Timer extends StatefulWidget {
   Duration duration;
+  FlutterBlueApp blue;
 
-  Timer(Duration duration) {
+  Timer(Duration duration, FlutterBlueApp blue) {
     this.duration = duration;
+    this.blue = blue;
   }
 
   @override
-  _timerState createState() => _timerState(duration);
+  _timerState createState() => _timerState(duration, blue);
 }
 
-class _timerState extends State<Timer> with TickerProviderStateMixin {
+class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   AnimationController controller;
   Duration duration;
+  FlutterBlueApp blue;
 
-  _timerState(Duration duration) {
+  _timerState(Duration duration, FlutterBlueApp blue) {
     this.duration = duration;
+    this.blue = blue;
   }
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
     if (duration.inMilliseconds == 0) {
-      Vibration.vibrate(
-        pattern: [0, 500, 300, 200, 200, 200, 200, 200, 100, 500]
-      );
+      try {
+        blue.vibrate();
+      } catch (e) {
+        Vibration.vibrate(
+            pattern: [0, 500, 300, 200, 200, 200, 200, 200, 100, 500]
+        );
+      }
+
       Navigator.pop(context);
     }
     return '${(duration.inHours).toString().padLeft(2, '0')}:'
@@ -79,7 +89,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                             children: <Widget>[
                               Text(
                                 "",
-                                style: TextStyle(fontSize: 100),
+                                style: TextStyle(fontSize: 65),
                               ),
                               AnimatedBuilder (
                                   animation: controller,
@@ -87,7 +97,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
                                     return new Text(
                                         timerString,
                                         style: TextStyle(
-                                          fontSize: 50,
+                                          fontSize: 40,
                                           color: Colors.white,
                                         )
                                     );
@@ -125,6 +135,8 @@ class _timerState extends State<Timer> with TickerProviderStateMixin {
       ),
     );
   }
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class TimerPainter extends CustomPainter {
