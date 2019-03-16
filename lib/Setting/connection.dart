@@ -239,6 +239,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
   }
 
   List<Widget> _buildServiceTiles() {
+    return new List<Widget>();
     return services
         .map(
           (s) => new ServiceTile(
@@ -321,14 +322,18 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     }
     if (isConnected) {
       tiles.add(_buildDeviceStateTile());
+      /*
       tiles.addAll(_buildServiceTiles());
+      */
     } else {
       tiles.addAll(_buildScanResultTiles());
     }
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
-          //title: const Text('FlutterBlue'),
+          title: new Text(
+            "UV-Timer",style: TextStyle(color: Colors.black87),
+          ),
           actions: _buildActionButtons(),
         ),
         floatingActionButton: _buildScanningButton(),
@@ -346,30 +351,8 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
         ),
       ),
     );
-  }
-
-  int on = 0;
-  void vibrate() {
-
-    BluetoothService TECO = services.last;
-    BluetoothCharacteristic vib = TECO.characteristics.first;
-
-    if (on == 0) {
-      _writeCharacteristicON(vib);
-      on = 1;
-    } else {
-      _writeCharacteristicOFF(vib);
-      on = 0;
-    }
-  }
-
-  void stop() {
-    BluetoothService TECO = services.last;
-    BluetoothCharacteristic vib = TECO.characteristics.first;
-    _writeCharacteristicOFF(vib);
-  }
-  /*
-  return new DefaultTabController(
+    /*
+  new DefaultTabController(
       length: 3,
       child: new Scaffold(
         backgroundColor: Colors.amber,
@@ -409,5 +392,41 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
           )
       ),
     );
+
+    class MyTabBarView extends StatelessWidget {
+      Widget build(BuildContext context) {
+      return new TabBarView(
+        children: <Widget>[
+          new CalculationWindow(),
+          new IndividualWindow(),
+          new FlutterBlueApp(),
+      ],
+    );
+  }
+}
    */
+
+  }
+
+  int on = 0;
+  void vibrate() {
+
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+
+    if (on == 0) {
+      _writeCharacteristicON(vib);
+      on = 1;
+    } else {
+      _writeCharacteristicOFF(vib);
+      on = 0;
+    }
+  }
+
+  void stop() {
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+    _writeCharacteristicOFF(vib);
+  }
+
 }
