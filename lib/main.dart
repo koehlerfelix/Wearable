@@ -10,6 +10,7 @@ void main() => runApp(MaterialApp(
   home: new Home(),
 ));
 
+
 class Home extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -58,15 +59,15 @@ class Home extends StatelessWidget {
 }
 
 class MyTabBarView extends StatelessWidget {
+  FlutterBlueApp blue = new FlutterBlueApp();
   Widget build(BuildContext context) {
     return new TabBarView(
       children: <Widget>[
-        new CalculationWindow(),
-        new IndividualWindow(),
-        new FlutterBlueApp(),
+        new CalculationWindow(blue: blue,),
+        new IndividualWindow(blue: blue),
+        blue,
       ],
     );
   }
 }
-
 

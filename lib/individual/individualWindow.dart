@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:day_time_app/timer.dart';
 import 'timeInput.dart';
+import 'package:day_time_app/Setting/connection.dart';
 
 class IndividualWindow extends StatelessWidget {
   Hours h;
   sixtyButton m;
   sixtyButton s;
+  FlutterBlueApp blue;
+
+  IndividualWindow({this.blue});
+
+  FlutterBlueApp getBlue() {
+    return blue;
+  }
 
   int getHours() {
     return h.getState();
@@ -51,13 +59,7 @@ class IndividualWindow extends StatelessWidget {
                   minWidth: 200,
                   color: Colors.grey,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Timer(Duration(
-                          seconds: s.getState(), minutes: m.getState(),
-                          hours: h.getState()
-                      ))),
-                    );
+                    show(context);
                   },
                   child: new Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
@@ -66,9 +68,14 @@ class IndividualWindow extends StatelessWidget {
       ),
     );//new Result(),
   }
+  show(BuildContext context) {
+    AlertDialog alert = new AlertDialog(
+      content: new Timer(Duration(
+          seconds: s.getState(), minutes: m.getState(), hours: h.getState()), blue),
+      actions: <Widget>[
+      ],
+    );
 
-  int calculateTime() {
-
+    showDialog(context: context, child: alert);
   }
-
 }

@@ -14,15 +14,21 @@ void main() {
 }
 
 class FlutterBlueApp extends StatefulWidget {
+  _FlutterBlueAppState state;
+
   FlutterBlueApp({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _FlutterBlueAppState createState() => new _FlutterBlueAppState();
+  _FlutterBlueAppState createState() => state = new _FlutterBlueAppState();
+
+  void vibrate() {
+    state.vibrate();
+  }
 }
 
-class _FlutterBlueAppState extends State<FlutterBlueApp> {
+class _FlutterBlueAppState extends State<FlutterBlueApp> with AutomaticKeepAliveClientMixin {
   FlutterBlue _flutterBlue = FlutterBlue.instance;
 
   /// Scanning
@@ -328,6 +334,32 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     } else {
       tiles.addAll(_buildScanResultTiles());
     }
+
+    return new MaterialApp(
+      home: new Scaffold(
+        floatingActionButton: _buildScanningButton(),
+        body: new Stack(
+          children: <Widget>[
+            (isScanning) ? _buildProgressBarTile() : new Container(),
+            new ListView(
+              children: tiles,
+            ),
+            new Align(
+              alignment: Alignment.center,
+              child: new MaterialButton(
+                child: new Text("Test"),
+                onPressed: vibrate,
+                height: 100,
+                minWidth: 200,
+                color: Colors.grey,
+              ),
+            )
+
+          ],
+        ),
+      ),
+    );
+    /*
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
@@ -335,6 +367,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
             "UV-Timer",style: TextStyle(color: Colors.black87),
           ),
           actions: _buildActionButtons(),
+
         ),
         floatingActionButton: _buildScanningButton(),
         body: new Stack(
@@ -351,6 +384,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
         ),
       ),
     );
+     */
     /*
   new DefaultTabController(
       length: 3,
@@ -423,10 +457,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     }
   }
 
-  void stop() {
-    BluetoothService TECO = services.last;
-    BluetoothCharacteristic vib = TECO.characteristics.first;
-    _writeCharacteristicOFF(vib);
-  }
+  @override
+  bool get wantKeepAlive => true;
 
 }
