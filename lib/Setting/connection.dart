@@ -23,9 +23,13 @@ class FlutterBlueApp extends StatefulWidget {
   @override
   _FlutterBlueAppState createState() => state = new _FlutterBlueAppState();
 
-  void vibrate() {
-    state.vibrate();
+  void vibrateON() {
+    state.vibrateON();
   }
+  void vibrateOFF() {
+    state.vibrateOFF();
+  }
+
 }
 
 class _FlutterBlueAppState extends State<FlutterBlueApp> with AutomaticKeepAliveClientMixin {
@@ -464,6 +468,21 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> with AutomaticKeepAlive
       _writeCharacteristicOFF(vib);
       on = 0;
     }
+  }
+  void vibrateOFF() {
+
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+
+    _writeCharacteristicOFF(vib);
+  }
+
+  void vibrateON() {
+
+    BluetoothService TECO = services.last;
+    BluetoothCharacteristic vib = TECO.characteristics.first;
+
+    _writeCharacteristicON(vib);
   }
 
   @override

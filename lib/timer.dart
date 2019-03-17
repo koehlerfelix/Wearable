@@ -30,7 +30,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
     Duration duration = controller.duration * controller.value;
     if (duration.inMilliseconds == 0) {
       try {
-        blue.vibrate();
+        blue.vibrateON();
       } catch (e) {
 
       }
@@ -125,7 +125,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
                     ),
                     onPressed: () {
                       try {
-                        blue.vibrate();
+                        blue.vibrateOFF();
                       } catch(e) {
                       }
                       Navigator.pop(context);
