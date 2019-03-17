@@ -57,7 +57,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.black87,
       body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column (
@@ -98,7 +98,7 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
                                         timerString,
                                         style: TextStyle(
                                           fontSize: 40,
-                                          color: Colors.white,
+                                          color: Colors.red,
                                         )
                                     );
                                   }
