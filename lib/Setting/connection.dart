@@ -347,14 +347,23 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> with AutomaticKeepAlive
             new Align(
               alignment: Alignment.center,
               child: new MaterialButton(
-                child: new Text("Test"),
+                child: new Text("Test", style: TextStyle(fontSize: 30),),
                 onPressed: vibrate,
                 height: 100,
                 minWidth: 200,
                 color: Colors.grey,
               ),
-            )
-
+            ),
+            new Align(
+              alignment: Alignment.bottomCenter,
+              child: new MaterialButton(
+                child: new Text("Disconnect", style: TextStyle(fontSize: 30),),
+                onPressed: () => _disconnect(),
+                height: 100,
+                minWidth: 200,
+                color: Colors.grey,
+              ),
+            ),
           ],
         ),
       ),
