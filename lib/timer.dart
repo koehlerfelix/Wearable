@@ -32,12 +32,12 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
       try {
         blue.vibrate();
       } catch (e) {
-        Vibration.vibrate(
-            pattern: [0, 500, 300, 200, 200, 200, 200, 200, 100, 500]
-        );
-      }
 
-      Navigator.pop(context);
+      }
+      Vibration.vibrate(
+          pattern: [0, 500, 300, 200, 200, 200, 200, 200, 100, 500]
+      );
+      return 'Eincremen';
     }
     return '${(duration.inHours).toString().padLeft(2, '0')}:'
         '${(duration.inMinutes % 60).toString().padLeft(2, '0')}:'
@@ -124,6 +124,10 @@ class _timerState extends State<Timer> with TickerProviderStateMixin, AutomaticK
                         }
                     ),
                     onPressed: () {
+                      try {
+                        blue.vibrate();
+                      } catch(e) {
+                      }
                       Navigator.pop(context);
                     },
                   )
